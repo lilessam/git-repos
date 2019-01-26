@@ -25,6 +25,10 @@ class GitServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton(\Lilessam\Git\Git::class, function () {
+            return new \Lilessam\Git\Git($this->app);
+        });
+
         $this->mergeConfigFrom(
             __DIR__ . '/config/git.php',
             'git'

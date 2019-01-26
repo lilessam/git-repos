@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=7.1.0",
         "illuminate/support": "~5.0",
         "bitbucket/client": "^1.1",
         "knplabs/github-api": "^2.10"

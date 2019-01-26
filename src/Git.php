@@ -4,6 +4,7 @@ namespace Lilessam\Git;
 
 use Illuminate\Support\Manager;
 use Lilessam\Git\Providers\Github;
+use Lilessam\Git\Providers\Bitbucket;
 
 class Git extends Manager
 {
@@ -24,7 +25,7 @@ class Git extends Manager
      */
     public function createGithubDriver()
     {
-        return new Github;
+        return app(Github::class);
     }
 
     /**
@@ -34,6 +35,6 @@ class Git extends Manager
      */
     public function createBitbucketDriver()
     {
-        return new Bitbucket;
+        return app(Bitbucket::class);
     }
 }
