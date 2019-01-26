@@ -50,6 +50,7 @@ public  function  handleProviderCallback()
 ```
 
 So, You'll need to write four static functions somewhere  and specify them in `config/git.php`
+
 1- `github.get_token_closure`
 A callback that will return the authenticated user Github access token.
 
