@@ -9,7 +9,9 @@ This package provides simplified API to access users Github & Bitbucket public a
 
 ### Installation
 1- `composer require lilessam/git-repos dev-master`
+
 2- Add `Lilessam\Git\GitServiceProvider::class` to `config/app.php`
+
 3- Run `php artisan vendor:publish --provider='Lilessam\Git\GitServiceProvider`
 
 
