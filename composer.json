@@ -1,0 +1,24 @@
+{
+    "name": "lilessam/git-repos",
+    "description": "Simplified API to access users Github & Bitbucket repositories.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed Essam",
+            "email": "erwinchafros@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~5.0",
+        "bitbucket/client": "^1.1",
+        "knplabs/github-api": "^2.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lilessam\\Git\\": "src/"
+        },
+        "files": ["src/helpers.php"]
+    },
+    "minimum-stability": "stable"
+}
