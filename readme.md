@@ -23,29 +23,21 @@ Please remember when you authenticate the users using Bitbucket to store the ref
 
 ```PHP
 /**
-
-* Obtain the user information from Bitbucket.
-
-*
-
-* @return  \Illuminate\Http\RedirectResponse
-
-*/
-
-public  function  handleProviderCallback()
-
+ * Obtain the user information from Bitbucket.
+ *
+ * @return \Illuminate\Http\RedirectResponse
+ */
+public function handleProviderCallback()
 {
+    $socialiteUser = Socialite::driver('bitbucket')->user();
 
-	$socialiteUser  =  Socialite::driver('bitbucket')->user();
+    $user = User::registerUsingBitbucket($socialiteUser);
 
-	$user  =  User::registerUsingBitbucket($socialiteUser);
+    $user->setBitbucketTokens($socialiteUser->token, $socialiteUser->refreshToken);
 
-	$user->setBitbucketTokens($socialiteUser->token,  $socialiteUser->refreshToken);
+    Auth::login($user);
 
-	Auth::login($user);
-
-	return  redirect($this->redirectTo);
-
+    return redirect($this->redirectTo);
 }
 ```
 
@@ -56,21 +48,13 @@ A callback that will return the authenticated user Github access token.
 
 ```PHP
 /**
-
-* Get Github token for the needed session.
-
-*
-
-* @return  string
-
-*/
-
-public  static  function  getGithubToken()
-
+ * Get Github token for the needed session.
+ *
+ * @return string
+ */
+public static function getGithubToken()
 {
-
-	return  Auth::user()->{static::GITHUB_TOKEN_COLUMN};
-
+    return Auth::user()->{static::GITHUB_TOKEN_COLUMN};
 }
 ```
 
@@ -79,21 +63,13 @@ A callback that will return the authenticated user Bitbucket access token.
 
 ```PHP
 /**
-
-* Get Bitbucket token for the needed session.
-
-*
-
-* @return  string
-
-*/
-
-public  static  function  getBitbucketToken()
-
+ * Get Bitbucket token for the needed session.
+ *
+ * @return string
+ */
+public static function getBitbucketToken()
 {
-
-	return  Auth::user()->{static::BITBUCKET_TOKEN_COLUMN};
-
+    return Auth::user()->{static::BITBUCKET_TOKEN_COLUMN};
 }
 ```
 
@@ -102,21 +78,13 @@ A callback that returns the Bitbucket refresh token of the authenticated user.
 
 ```PHP
 /**
-
-* Get Bitbucket refresh token and return it for Git service provider.
-
-*
-
-* @return  string
-
-*/
-
-public  static  function  getBitbucketRefreshToken()
-
+ * Get Bitbucket refresh token and return it for Git service provider.
+ *
+ * @return string
+ */
+public static function getBitbucketRefreshToken()
 {
-
-	return  Auth::user()->{static::BITBUCKET_REFRESH_TOKEN_COLUMN};
-
+    return Auth::user()->{static::BITBUCKET_REFRESH_TOKEN_COLUMN};
 }
 ```
 
@@ -125,21 +93,14 @@ A callback that will be used to update the Bitbcuket access token. It will recei
 
 ```PHP
 /**
-
-* Update the Bitbucket access token in storage.
-
-* @param  string $token
-
-* @return  void
-
-*/
-
-public  static  function  updateBitbucketToken($token)
-
+ * Update the Bitbucket access token in storage.
+ *
+ * @param string $token
+ * @return void
+ */
+public static function updateBitbucketToken($token)
 {
-
-	Auth::user()->update([static::BITBUCKET_TOKEN_COLUMN =>  $token]);
-
+    Auth::user()->update([static::BITBUCKET_TOKEN_COLUMN => $token]);
 }
 
 ```
@@ -173,7 +134,7 @@ git()->driver('bitbucket')->repos();
 3- Get specific repository info.
 ```PHP
 $repo = git()->repos()->first(function  ($repo)  {
-	return  $repo->id  ==  'lilessam/git-repos';
+    return  $repo->id  ==  'lilessam/git-repos';
 });
 
 echo $repo->id; // 'lilessam/git-repos'
@@ -184,7 +145,7 @@ echo $repo->url; // 'https://github.com/lilessam/git-repos'
 4- Download repository.
 ```PHP
 $repo = git()->repos()->first(function  ($repo)  {
-	return  $repo->id  ==  'lilessam/git-repos';
+    return  $repo->id  ==  'lilessam/git-repos';
 });
 $repo->download('zip');
 // OR
