@@ -1,6 +1,9 @@
 ## Laravel Git Repos
 This package provides simplified API to access users Github & Bitbucket public and private repositories and download their contents as zip files.
 
+## Support Me
+[Buy Me A Coffee](https://www.buymeacoffee.com/a7med3essam)
+
 ### Requirements
 - PHP >= 7.1
 - `illuminate/support` ~5.0
